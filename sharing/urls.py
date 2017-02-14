@@ -15,7 +15,18 @@ Including another URLconf
 """
 from django.conf.urls import url
 from django.contrib import admin
+from videos.views import VideoListView,VideoDetailView,\
+						 VideoCreateView,VideoUpdateView,\
+						 VideoDeleteView
+from .views import HomeView,home
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
+    url(r'^$',HomeView.as_view(),name="home"),
+    url(r'^videos/$',VideoListView.as_view(),name="video-list"),
+    url(r'^videos/create/$',VideoCreateView.as_view(),name="video-create"),
+    # url(r'^videos/(?P<pk>\d+)/$',VideoDetailView.as_view(),name="video-detail"),
+    url(r'^videos/(?P<slug>[\w-]+)/$',VideoDetailView.as_view(),name="video-detail-slug"),
+    url(r'^videos/(?P<slug>[\w-]+)/edit/$',VideoUpdateView.as_view(),name="video-update"),
+    url(r'^videos/(?P<slug>[\w-]+)/delete/$',VideoDeleteView.as_view(),name="video-delete"),
 ]

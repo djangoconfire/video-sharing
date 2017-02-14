@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>Hello, {{ name }} {{ random_number }}!</h1>
+    {% if request.user.is_authenticated %}
+        Hi user
+    {% endif %}
+{% endblock content %}
+
