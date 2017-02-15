@@ -6,6 +6,7 @@ from django.views.generic import (
 	ListView,
 	DeleteView
 	)
+from django.http import Http404
 from models import Course
 from django.contrib.auth.mixins import LoginRequiredMixin
 from videos.mixins import MemberRequiredMixin, StaffMemberRequiredMixin
@@ -28,6 +29,13 @@ class CourseCreateView(StaffMemberRequiredMixin,CreateView):
 # Detail
 class CourseDetailView(MemberRequiredMixin,DetailView):
 	queryset=Course.objects.all()
+
+	def get_object(self):
+		slug=self.kwargs.get("slug")
+		obj=Course.objects.filter(slug=slug)
+		if obj.exists():
+			return obj.first()
+		raise Http404	
 
 
 # List
@@ -53,7 +61,23 @@ class CourseUpdateView(StaffMemberRequiredMixin,UpdateView):
 		
 		return super(CourseUpdateView,self).form_valid(form)	
 
+
+	def get_object(self):
+		slug=self.kwargs.get("slug")
+		obj=Course.objects.filter(slug=slug)
+		if obj.exists():
+			return obj.first()
+		raise Http404
+
+
 # Delete
 class CourseDeleteView(StaffMemberRequiredMixin,DeleteView):
 	queryset=Course.objects.all()
 	success_url='/videos/'
+
+	def get_object(self):
+		slug=self.kwargs.get("slug")
+		obj=Course.objects.filter(slug=slug)
+		if obj.exists():
+			return obj.first()
+		raise Http404

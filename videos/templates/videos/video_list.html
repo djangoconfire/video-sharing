@@ -3,10 +3,14 @@
 {% block title %} Video | {{block.super}} {% endblock title %}
 
 {% block content %}
-	<ul>
-		{% for item in object_list %}
-			<li><a href="{{item.get_absolute_url}}">{{item.title}}</a></li>
-		{% endfor %}
-	</ul>
-
+	<div class="row">
+		<div class="col-sm-8 col-sm-offset-2">
+			<ul>
+				{% for item in object_list %}
+					<li><a href="{{item.get_absolute_url}}">{{item.title}}</a></li>
+				{% endfor %}
+			</ul>
+		</div>
+	</div>
+	
 {% endblock content %}

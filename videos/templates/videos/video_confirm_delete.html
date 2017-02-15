@@ -3,9 +3,13 @@
 {% block title %}Video | Delete {% endblock title %}
 
 {% block content %}
-	<form method="POST" action=''>{% csrf_token %}
-		<p> Are you sure want to delete this {{object.title}}</p>
-		<input type="submit" value="Yes" class="btn btn-success">
-		<a href="{{object.get_absolute_url}}">Cancel</a>
-	</form>
+	<div class="row">
+		<div class="col-sm-8 col-sm-offset-2">
+			<form method="POST" action=''>{% csrf_token %}
+				<p> Are you sure want to delete this {{object.title}}</p>
+				<input type="submit" value="Yes" class="btn btn-success">
+				<a href="{{object.get_absolute_url}}">Cancel</a>
+			</form>
+		</div>
+	</div>		
 {% endblock content %}

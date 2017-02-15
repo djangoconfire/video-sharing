@@ -3,10 +3,14 @@
 {% block title %} Video {% endblock title %}
 
 {% block content %}
-	<h1>Hi</h1>
-	{{object.title}}
-	{{object.embed_code|safe}}
-	{{object.updated}}
-	{{object.id}}
-
+	<div class="row">
+		<div class="col-sm-8 col-sm-offset-2">
+			<h1>Hi</h1>
+			{{object.title}}
+			{{object.embed_code|safe}}
+			{{object.updated}}
+			{{object.id}}
+		</div>	
+	</div>
+	
 {% endblock content %}

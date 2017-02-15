@@ -2,9 +2,13 @@
 {% block title %} Video | Submission Form {% endblock title %}
 
 {% block content %}
-	<form method="POST" action=''>{% csrf_token %}
-		{{form.as_p}}
-		<input type="submit" class="btn btn-primary" value="save"/>
-	</form>
-
+	<div class="row">
+		<div class="col-sm-8 col-sm-offset-2">
+			<form method="POST" action=''>{% csrf_token %}
+				{{form.as_p}}
+				<input type="submit" class="btn btn-primary" value="save"/>
+			</form>
+		</div>
+	</div>
+	
 {% endblock content %}
