@@ -7,11 +7,13 @@ from django.core.urlresolvers import reverse
 # Create your models here.
 
 class Video(models.Model):
-	title		=models.CharField(max_length=100,null=True)
-	slug		=models.SlugField(blank=True)
-	embed_code	=models.TextField()
-	updated		=models.DateTimeField(auto_now=True,null=True)
-	timestamp	=models.DateTimeField(auto_now_add=True,null=True)
+	title				=models.CharField(max_length=100,null=True)
+	slug				=models.SlugField(blank=True)
+	embed_code			=models.TextField()
+	free				=models.BooleanField(default=True)
+	member_required		=models.BooleanField(default=False)
+	updated				=models.DateTimeField(auto_now=True,null=True)
+	timestamp			=models.DateTimeField(auto_now_add=True,null=True)
 
 	def __unicode__(self):
 		return self.title

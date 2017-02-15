@@ -13,20 +13,20 @@ Including another URLconf
     1. Import the include() function: from django.conf.urls import url, include
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
-from django.conf.urls import url
+from django.conf.urls import url,include
 from django.contrib import admin
-from videos.views import VideoListView,VideoDetailView,\
-						 VideoCreateView,VideoUpdateView,\
-						 VideoDeleteView
+from django.conf import settings
+from django.conf.urls.static import static
 from .views import HomeView,home
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^$',HomeView.as_view(),name="home"),
-    url(r'^videos/$',VideoListView.as_view(),name="video-list"),
-    url(r'^videos/create/$',VideoCreateView.as_view(),name="video-create"),
-    # url(r'^videos/(?P<pk>\d+)/$',VideoDetailView.as_view(),name="video-detail"),
-    url(r'^videos/(?P<slug>[\w-]+)/$',VideoDetailView.as_view(),name="video-detail-slug"),
-    url(r'^videos/(?P<slug>[\w-]+)/edit/$',VideoUpdateView.as_view(),name="video-update"),
-    url(r'^videos/(?P<slug>[\w-]+)/delete/$',VideoDeleteView.as_view(),name="video-delete"),
+    url(r'^videos/',include('videos.urls',namespace="videos")),
+    url(r'^courses/',include('courses.urls',namespace="courses")),
+
 ]
+
+if settings.DEBUG:
+    urlpatterns+=static(settings.STATIC_URL,document_root=settings.STATIC_ROOT)
+    urlpatterns+=static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)
