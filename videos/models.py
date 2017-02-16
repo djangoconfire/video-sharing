@@ -24,5 +24,5 @@ class Video(models.Model):
 
 def pre_save_video_receiver(sender,instance,*args,**kwargs):
 	if not instance.slug:
-		instance.slug=create_slug(instance.title)
+		instance.slug=create_slug(instance)
 pre_save.connect(pre_save_video_receiver,sender=Video)			

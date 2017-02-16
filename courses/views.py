@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render,get_object_or_404
 from django.views.generic import (
 	CreateView,
 	DetailView,
@@ -25,6 +25,16 @@ class CourseCreateView(StaffMemberRequiredMixin,CreateView):
 		obj.save()
 
 		return super(CourseCreateView,self).form_valid(form)
+
+
+# Lecture Detail
+class LectureDetailView(MemberRequiredMixin,DetailView):
+	def get_object(self):
+		course_slug=self.kwargs.get("cslug")
+		lecture_slug=self.kwargs.get("lslug")
+		obj=get_object_or_404(Lecture,course__slug=course_slug,slug=lecture_slug)
+		return obj
+
 
 # Detail
 class CourseDetailView(MemberRequiredMixin,DetailView):
